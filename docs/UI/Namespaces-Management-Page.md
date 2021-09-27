@@ -4,7 +4,7 @@ Here you can find all namespaces you have rights(at least READ) to.
 
 ## First look
 
-![Namespace Table](Images/namespaces/table.jpg?raw=true)
+![Namespace Table](Images/namespaces/table.png?raw=true)
 
 As you can see whole page, except [**Create namespace**](#create-namespace) button, is just a table.
 

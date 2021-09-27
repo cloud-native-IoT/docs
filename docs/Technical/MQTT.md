@@ -7,7 +7,7 @@ Here you can manage particular device.
 you can see the Device State Card after selecting your device on UI.
 It has two columns: **Reported** and **Desired** state:
 
-![Device State](../UI/Images/device/state-base.jpg?raw=true)
+![Device State](../UI/Images/device/state-base.png?raw=true)
 
 **Mark 1 - Reported** state is the state received from the device.
 
@@ -25,7 +25,7 @@ Example : mosquitto_pub --cafile cert.pem --cert test.crt --key test.key  -t “
 
 By clicking on **Edit** button(**Mark 7**) - you enter **Desired** state edit mode(JSON editor - **Mark 1** below) - this is the data to be sent to the device.
 
-![Device State Edit Mode](../UI/Images/device/state-edit-mode.jpg?raw=true)
+![Device State Edit Mode](../UI/Images/device/state-edit-mode.png?raw=true)
 
 **Desired** State can be subscribed using Eclipse **mosquitto_sub**
 

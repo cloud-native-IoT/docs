@@ -6,13 +6,13 @@ Here you can read about little tweaks or components being used across recasta co
 
 Modal window with usual form:
 
-![Reset-Password](Images/miscellaneous/reset-password.jpg?raw=true)
+![Reset-Password](Images/miscellaneous/reset-password.png?raw=true)
 
 ## Themes Selector
 
 You can find Themes Selector at the Console Footer
 
-![Themes-Selector](Images/miscellaneous/themes-selector.jpg?raw=true)
+![Themes-Selector](Images/miscellaneous/themes-selector.png?raw=true)
 
 recasta Console currently has only three common color schemes:
 

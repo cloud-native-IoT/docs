@@ -4,7 +4,7 @@ Here you can find all user accounts you have rights(at least READ) to.
 
 ## First look
 
-![Accounts Table](Images/accounts/table.jpg?raw=true)
+![Accounts Table](Images/accounts/table.png?raw=true)
 
 As you can see whole page, except [**Create Account**](#create-account) button, is just a table.
 Is consists of 5 columns:
@@ -20,4 +20,4 @@ Is consists of 5 columns:
 
 On top of the page, you can see [**Create Account**](#create-account) button, by clicking on it, you would get a drawer open:
 
-![Create Account Drawer](Images/accounts/create-account-drawer.jpg?raw=true)
+![Create Account Drawer](Images/accounts/create-account-drawer.png?raw=true)
