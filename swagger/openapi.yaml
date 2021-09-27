@@ -764,10 +764,10 @@ info:
   contact:
     email: support@recasta.io
     name: recasta
-    url: 'https://www.recasta.cloud'
+    url: 'https://recasta.cloud'
   description: social AIoT Platform
   title: recasta Platform
-  version: 0.0.10
+  version: 0.0.12
 openapi: 3.0.0
 paths:
   /account:

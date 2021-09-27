@@ -12,7 +12,7 @@ The Device States Endpoints allows you to manage the states of devices. Below ar
 
 Pre-Requisites: 
 
-1. You need valid user credentials for the applications to obtain token (Refer [here](https://recasta.github.io/recasta/docs/#/REST/GenerateToken#how-to-obtain-the-token) on how to generate a token)
+1. You need valid user credentials for the applications to obtain token (Refer [here](https://recasta.github.io/docs/#/REST/GenerateToken#how-to-obtain-the-token) on how to generate a token)
 2. You need a device id for which you want to see the current state
 
 Steps:
@@ -29,7 +29,7 @@ Steps:
 
 ## How to PATCH the desired Device State
 
-1. You need valid user credentials for the applications to obtain token (Refer [here](https://recasta.github.io/recasta/docs/#/REST/GenerateToken#how-to-obtain-the-token) on how to generate a token)
+1. You need valid user credentials for the applications to obtain token (Refer [here](https://recasta.github.io/docs/#/REST/GenerateToken#how-to-obtain-the-token) on how to generate a token)
 2. You need a device id to which you want to patch the desired state
 
 Steps:
@@ -46,7 +46,7 @@ Steps:
 
 ## How to get the device reported state streaming
 
-1. You need valid user credentials for the applications to obtain token (Refer [here](https://recasta.github.io/recasta/docs/#/REST/GenerateToken#how-to-obtain-the-token) on how to generate a token)
+1. You need valid user credentials for the applications to obtain token (Refer [here](https://recasta.github.io/docs/#/REST/GenerateToken#how-to-obtain-the-token) on how to generate a token)
 2. You need a device id to which you want to stream the device reported state
 
 Steps:
@@ -61,4 +61,4 @@ Steps:
 
 2. Once the above REST Request is send with the correct device id and correct token, the specific device reported state will be streamed and HTTP 200 response will be recieved. Otherwise you will get an error with the reason why the streaming was not successful.
 
-curl request for streaming : curl -X GET "https://URL/devices/device.id/state/stream?only_delta=false" -H "Authorization: Bearer Authentication_Token"
+curl request for streaming : curl -X GET "https://api.recasta.cloud/devices/device.id/state/stream?only_delta=false" -H "Authorization: Bearer Authentication_Token"
