@@ -8,10 +8,11 @@ Generate a **private key** for the device:
 openssl genrsa -out {key_filename}.key 4096
 
 Generate the **client certificate** (and self-sign it):
-
+```
 openssl req -new -x509 -sha256 -key {key_filename}.key -out {crt_filename}.crt -days 365
+```
 
-To script the valid device certificates we developed a script which is used by our users:
+We developed a script which is widley used to generate valid mqtt tls certificate chains:
 
 ```
 FILENAME=$1
