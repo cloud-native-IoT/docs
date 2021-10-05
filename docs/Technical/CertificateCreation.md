@@ -4,8 +4,9 @@ Here you find some notes about device certificate creation
 At present, recasta supports only X509 certificate authentication for devices.
 
 Generate a **private key** for the device:
-
+```
 openssl genrsa -out {key_filename}.key 4096
+```
 
 Generate the **client certificate** (and self-sign it):
 ```
