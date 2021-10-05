@@ -1,4 +1,4 @@
-# Accounts Management
+# Account Management
 
 Here you can find all user accounts you have rights(at least READ) to.
 

@@ -1,6 +1,6 @@
 # Namespaces Management
 
-Here you can find all namespaces you have rights(at least READ) to.
+Here you can find all namespaces you have rights(at least READ) to. Namespaces are the tenants in our cloud, initial a user has his own namespace, which does not allow to connect devices. This namespace is the users private tenant to manage his space. A user can here invite other users to see namespaces with his data in, can define which right the invitee should have and of course remove the rights. 
 
 ## First look
 
