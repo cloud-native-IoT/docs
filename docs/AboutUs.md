@@ -29,5 +29,5 @@
 [1]: https://twitter.com/recasta_cloud
 [2]: https://www.facebook.com/recastacloud
 [3]: https://www.instagram.com/#
-[4]: https://www.linkedin.com/company/recasta
+[4]: https://www.linkedin.com/company/recasta-cloud/
 [5]: http://www.github.com/recasta
