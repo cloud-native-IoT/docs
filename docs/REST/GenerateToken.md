@@ -4,7 +4,7 @@ All the REST Endpoints for the product requries an Authentication token for them
 
 > Request unauthenticated with bearer
 
-## How to obtain the Token 
+## How to obtain the token 
 
 Pre-Requisites: 
 
@@ -14,7 +14,7 @@ Steps:
 
 1. REST Request Details for Token generation
    
-   - REST Endpoint: **{URL}/account/token**
+   - REST Endpoint: **{URL}/token**
    > URL is the domain for the environment E.g. console.recasta.dummy
    - Request Type: **POST**
    - Request Header: **Content-Type: application/json**
@@ -27,15 +27,17 @@ Example:
 Sample Request Body:
 ```
 {
-"password": "Enter Password here",
-"username": "Enter UserID here"
+  "auth": {
+    "type": "standard",
+    "data": ["username", "password"]
+  }
 }
 ```
 
 Sample Response:
 ```
 {
-"token": "Authentiction_Token"
+    "token": "Authentication Token"
 }
 ```
 
