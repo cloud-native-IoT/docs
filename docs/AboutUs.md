@@ -5,7 +5,7 @@
 
 [![Twitter][1.1]][1] <pad>&nbsp;</pad>
 [![Facebook][2.1]][2] <pad>&nbsp;</pad>
-<!-- [![Instagram][3.1]][3] <pad>&nbsp;</pad> -->
+[![Instagram][3.1]][3] <pad>&nbsp;</pad>
 [![LinkedIn][4.1]][4] <pad>&nbsp;</pad>
 [![GitHub][5.1]][5] <pad>&nbsp;</pad>
 
@@ -28,6 +28,6 @@
 
 [1]: https://twitter.com/recasta_cloud
 [2]: https://www.facebook.com/recastacloud
-[3]: https://www.instagram.com/#
+[3]: https://www.instagram.com/recasta_cloud/
 [4]: https://www.linkedin.com/company/recasta-cloud/
 [5]: http://www.github.com/recasta
