@@ -4,15 +4,12 @@ The Accounts Endpoint allows you to mange user accounts for the applications. Be
 
 | HTTP Request | Endpoints | Purpose of the Endpoint |
 |--------------|-----------|-------------------------|
-| POST | /accounts | Create an user account |
+| PUT | /accounts | Create an user account |
+| GET | /accounts | Get details of all user accounts |
 | GET | /accounts/{id} | Get details of a specific account |
+| POST | /accounts/{account.uid}/toggle | Enable / Disable a specific account |
 | PATCH | /accounts/{account.uid} | Update an account |
 | DELETE | /accounts/{uid} | Delete a specific account |
-| GET | /accounts | Get details of all user accounts |
-| GET | /account | Get details of current user |
-| PUT | /accounts/{accountid}/owner/{ownerid} | Add an owner to the user account |
-| DELETE | /accounts/{accountid}/owner/{ownerid} | Remove an owner from the user account |
-
 
 
 ## How to create an Account
@@ -27,7 +24,7 @@ Steps:
    
    - REST Endpoint: **<URL>/accounts**
    > URL is the domain for the environment E.g. console.recasta.dummy
-   - Request Type: **POST**
+   - Request Type: **PUT**
    - Request Header: **Content-Type: application/json**
    - Request Header: **Authorization: bearer Authentication_Token**
    - Request Body: **Content in JSON format**
@@ -36,35 +33,16 @@ Request Body Format:
 ```
 {
   "account": {
-    "default_namespace": {
-      "deleteinitiationtime": "string",
-      "id": "string",
-      "markfordeletion": false,
-      "name": "string"
-    },
-    "enabled": false,
-    "is_admin": false,
-    "is_root": false,
-    "name": "string",
-    "owner": "string",
-    "password": "string",
-    "uid": "string",
-    "username": "string"
+    "title": "TEST-ACCOUNT-USERNAME",
+    "enabled": false
   },
-  "create_gf_user": false,
-  "password": "string"
-}
-```
-
-Sample Body Format:
-```
-{
-  "account": {
-    "enabled": true,
-    "is_admin": false,
-    "name": "FirstName LastName",
-    "password": "NewPassword",
-    "username": "NewUser"
+  "namespace": "Namespace ID",
+  "credentials": {
+    "type": "standard",
+    "data": [
+      "TEST-ACCOUNT-USERNAME",
+      "PASSWORD"
+    ]
   }
 }
 ```
@@ -74,7 +52,49 @@ Sample Body Format:
 Sample Response:
 ```
 {
-  "uid":"string"
+    "account": {
+        "uuid": "8815bce8-9b99-433e-ac5d-c8932e7c70c9",
+        "title": "TEST-ACCOUNT-USERNAME",
+        "enabled": false,
+        "defaultNamespace": "a1401aaa-bf1e-4847-af8b-e581c46db2f8"
+    }
+}
+```
+
+## How to get all Accounts data
+
+Pre-Requisites: 
+
+1. You need valid user credentials for the applications to obtain token (Refer [here](https://recasta.github.io/docs/#/REST/GenerateToken#how-to-obtain-the-token) on how to generate a token)
+2. You need a namespace 
+
+Steps:
+
+1. REST Request Details for Getting all Accounts
+   
+   - REST Endpoint: **<URL>/accounts**
+   > URL is the domain for the environment E.g. console.recasta.dummy
+   - Request Type: **GET**
+   - Request Header: **Authorization: bearer Authentication_Token**
+
+2. Once the above REST Request is send to the endpoint, it returns all the accounts present. If the user is admin then all accounts manged by the Admin will be returned otherwise only the self account will be returned.
+
+Response Format:
+```
+{
+    "accounts": [
+        {
+            "uuid": "11d31fa7-969c-474d-80cc-d097c78324b1",
+            "title": "TEST-ACCOUNT-USERNAME",
+            "enabled": true,
+            "defaultNamespace": "a1401aaa-bf1e-4847-af8b-e581c46db2f8",
+            "access": {
+                "level": "ROOT",
+                "role": "OWNER",
+                "namespace": "a1401aaa-bf1e-4847-af8b-e581c46db2f8",
+            }
+        },
+        ...
 }
 ```
 
@@ -100,26 +120,66 @@ Steps:
 Response Format:
 ```
 {
-  "account": [
-  {
-    "default_namespace": {
-      "deleteinitiationtime": "string",
-      "id": "string",
-      "markfordeletion": false,
-      "name": "string"
-    },
+    "uuid": "ID",
+    "title": "TEST-ACCOUNT-USERNAME",
     "enabled": false,
-    "is_admin": false,
-    "is_root": false,
-    "name": "string",
-    "owner": "string",
-    "password": "string",
-    "uid": "string",
-    "username": "string"
-  }
-  ]
+    "defaultNamespace": "a1401aaa-bf1e-4847-af8b-e581c46db2f8",
+    "access": {
+        "level": "ADMIN",
+        "role": "OWNER",
+        "namespace": "a1401aaa-bf1e-4847-af8b-e581c46db2f8"
+    }
 }
 ```
+
+
+## How to enable/disable an Account
+
+Pre-Requisites:
+
+1. You need valid user credentials for the applications to obtain token (Refer [here](https://recasta.github.io/docs/#/REST/GenerateToken#how-to-obtain-the-token) on how to generate a token)
+2. You have created a new user that is currently disabled 
+
+Steps:
+
+1. REST Request Details for getting a namespace data
+   
+   - REST Endpoint: **<URL>/accounts/{id}/toggle**
+   > URL is the domain for the environment E.g. console.recasta.dummy
+   - Request Path Parameters: **id should be a valid account id**
+   - Request Type: **POST**
+   - Request Header: **Authorization: bearer Authentication_Token**
+
+Request Body Format:
+```
+{
+  "enabled": true,
+  "defaultNamespace": "a1401aaa-bf1e-4847-af8b-e581c46db2f8",
+  "access": {
+    "level": "ADMIN",
+    "role": "OWNER",
+    "namespace": "a1401aaa-bf1e-4847-af8b-e581c46db2f8"
+  }
+}
+```
+
+2. Once the above REST Request is send with the required JSON body to the endpoint, an account will be created and JSON response will be send back.
+
+Sample Response:
+```
+{
+    "uuid": "8815bce8-9b99-433e-ac5d-c8932e7c70c9",
+    "title": "TEST-ACCOUNT-USERNAME",
+    "enabled": false,
+    "defaultNamespace": "a1401aaa-bf1e-4847-af8b-e581c46db2f8",
+    "access": {
+        "level": "ADMIN",
+        "role": "OWNER",
+        "namespace": "a1401aaa-bf1e-4847-af8b-e581c46db2f8"
+    }
+}
+```
+
 
 ## How to update an Account
 
@@ -143,20 +203,14 @@ Steps:
 Request Body Format:
 ```
 {
-  "default_namespace": {
-    "deleteinitiationtime": "string",
-    "id": "string",
-    "markfordeletion": false,
-    "name": "string"
-  },
-  "enabled": false,
-  "is_admin": false,
-  "is_root": false,
-  "name": "string",
-  "owner": "string",
-  "password": "string",
-  "uid": "string",
-  "username": "string"
+  "title": "TEST-ACCOUNT-USERNAME",
+  "enabled": true,
+  "defaultNamespace": "a1401aaa-bf1e-4847-af8b-e581c46db2f8",
+    "access": {
+        "level": "ADMIN",
+        "role": "OWNER",
+        "namespace": "a1401aaa-bf1e-4847-af8b-e581c46db2f8"
+    }
 }
 ```
 
@@ -165,10 +219,15 @@ Sample Request Body:
 Below is an example of an update JSON request which will update the account with ID 0x000. The fields it will update are Name, Password and Enabled.
 ```
 {
-  "enabled": true,
-  "name": "NewName",
-  "password": "NewPassword",
-  "uid": "0x000",
+    "uuid": "0x000",
+    "title": "TEST-ACCOUNT-USERNAME",
+    "enabled": true,
+    "defaultNamespace": "a1401aaa-bf1e-4847-af8b-e581c46db2f8",
+    "access": {
+        "level": "ADMIN",
+        "role": "OWNER",
+        "namespace": "a1401aaa-bf1e-4847-af8b-e581c46db2f8"
+    }
 }
 ```
 
@@ -192,124 +251,3 @@ Steps:
    - Request Header: **Authorization: bearer Authentication_Token**
 
 2. Once the above REST Request is send with the required path parameters to the endpoint, an HTTP 200 reposne is receive if the account is deleted. Otherwise you will get an error with the reason why the request was not successful.
-
-## How to get all Accounts data
-
-Pre-Requisites: 
-
-1. You need valid user credentials for the applications to obtain token (Refer [here](https://recasta.github.io/docs/#/REST/GenerateToken#how-to-obtain-the-token) on how to generate a token)
-2. You need a namespace 
-
-Steps:
-
-1. REST Request Details for Getting all Accounts
-   
-   - REST Endpoint: **<URL>/accounts**
-   > URL is the domain for the environment E.g. console.recasta.dummy
-   - Request Type: **GET**
-   - Request Header: **Authorization: bearer Authentication_Token**
-
-2. Once the above REST Request is send to the endpoint, it returns all the accounts present. If the user is admin then all accounts manged by the Admin will be returned otherwise only the self account will be returned.
-
-Response Format:
-```
-{
-  "account": [
-      {
-    "default_namespace": {
-      "deleteinitiationtime": "string",
-      "id": "string",
-      "markfordeletion": false,
-      "name": "string"
-    },
-    "enabled": false,
-    "is_admin": false,
-    "is_root": false,
-    "name": "string",
-    "owner": "string",
-    "password": "string",
-    "uid": "string",
-    "username": "string"
-    },
-  ]
-}
-```
-
-## How to get self or current account data
-
-Pre-Requisites: 
-
-1. You need valid user credentials for the applications to obtain token (Refer [here](https://recasta.github.io/docs/#/REST/GenerateToken#how-to-obtain-the-token) on how to generate a token)
-2. You need a namespace 
-
-Steps:
-
-1. REST Request Details for getting all users for a Namespace
-   
-   - REST Endpoint: **<URL>/account**
-   > URL is the domain for the environment E.g. console.recasta.dummy
-   - Request Type: **GET**
-   - Request Header: **Authorization: bearer Authentication_Token**
-
-2. Once the above REST Request is send to the endpoint, the details of all the current user will be displayed for the namespace in JSON format.
-
-Response Format:
-```
-{
-  "account": {
-    "default_namespace": {
-      "deleteinitiationtime": "string",
-      "id": "string",
-      "markfordeletion": false,
-      "name": "string"
-    },
-    "enabled": false,
-    "is_admin": false,
-    "is_root": false,
-    "name": "string",
-    "owner": "string",
-    "password": "string",
-    "uid": "string",
-    "username": "string"
-  }
-}
-```
-
-## How to add an owner for an Account
-
-Pre-Requisites: 
-
-1. You need valid user credentials for the applications to obtain token (Refer [here](https://recasta.github.io/docs/#/REST/GenerateToken#how-to-obtain-the-token) on how to generate a token)
-2. You need a namespace 
-
-Steps:
-
-1. REST Request Details for adding an owner for an Account
-   
-   - REST Endpoint: **<URL>/accounts/{accountid}/owner/{ownerid}**
-   > URL is the domain for the environment E.g. console.recasta.dummy
-   - Request Path Parameters: **accountid should be a valid account id and the ownerid should be a valid user account with Admin priviledges in recasta**
-   - Request Type: **PUT**
-   - Request Header: **Authorization: bearer Authentication_Token**
-
-2. Once the above REST Request is send with the required path parameters to the endpoint, an HTTP 200 reponse is receive if the request was successful. Otherwise you will get an error with the reason why the request was not successful.
-
-## How to remove an owner from an Account
-
-Pre-Requisites: 
-
-1. You need valid user credentials for the applications to obtain token (Refer [here](https://recasta.github.io/docs/#/REST/GenerateToken#how-to-obtain-the-token) on how to generate a token)
-2. You need a namespace 
-
-Steps:
-
-1. REST Request Details for removing owner from an Account
-   
-   - REST Endpoint: **<URL>/accounts/{accountid}/owner/{ownerid}**
-   > URL is the domain for the environment E.g. console.recasta.dummy
-   - Request Path Parameters: **accountid should be a valid account id and the ownerid should be a valid user account with Admin priviledges in recasta**
-   - Request Type: **DELETE**
-   - Request Header: **Authorization: bearer Authentication_Token**
-
-2. Once the above REST Request is send with the required path parameter to the endpoint, the specific owner will be removed from the account and an HTTP 200 response will be received. Otherwise you will get an error with the reason why the request was not successful.
-
